@@ -1,16 +1,15 @@
 var population;
-var lifespan = 100;
+var lifespan = 300;
 var lifeP;
 var count = 0;
 var target;
 var maxforce = 1;
-var inside = false;
 var numberofhits = 0;
 var numberofhitsP;
 var locked = undefined;
 var obstacles = [];
-var mutationRate = 0.05;
-
+var mutationRate = 0.01;
+var flag = false;
 function reset() {
   population.reset();
   this.obstacles = [];
@@ -31,7 +30,8 @@ function Target() {
 }
 
 function setup() {
-  createCanvas(windowWidth * 0.9, windowHeight * 0.8);
+  frameRate(90);
+  createCanvas(windowWidth * 0.9, windowHeight * 0.7);
   population = new Population();
   lifeP = createP();
 
@@ -71,19 +71,19 @@ function draw() {
         mouseY < startPos.y ? mouseY : startPos.y
       );
       rect(corner.x, corner.y, w, h);
+    } else if (locked == false) {
+      console.log("Ahoy");
+      var temp = new Obstacle();
+      console.log(temp);
+      obstacles.push(temp);
+      drawrect = false;
+      locked = undefined;
     }
-  } else if (locked == false) {
-    console.log(locked);
-    var temp = new Obstacle();
-    obstacles.push(temp);
-    drawrect = false;
-    locked = undefined;
   }
 
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].show();
   }
-
   fill(color(255, 110, 0));
   target.show();
 }

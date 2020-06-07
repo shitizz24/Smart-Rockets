@@ -59,9 +59,12 @@ function Rocket(dna) {
     }
 
     this.history.push(createVector(this.pos.x, this.pos.y));
+    if (this.history.length > 30) {
+      this.history.splice(0, 1);
+    }
     this.applyForce(this.dna.genes[count]);
 
-    if (!this.completed && !this.crashed && !this.obstaclecrashed) {
+    if (!this.completed || !this.crashed || !this.obstaclecrashed) {
       this.vel.add(this.acc);
       this.pos.add(this.vel);
       this.acc.mult(0);
