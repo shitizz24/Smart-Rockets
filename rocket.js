@@ -36,7 +36,7 @@ function Rocket(dna) {
       if (
         this.pos.x >= obstacles[i].corner1.x &&
         this.pos.x <= obstacles[i].corner2.x &&
-        this.pos.y >= obstacles[i].corner2.y &&
+        this.pos.y >= obstacles[i].corner1.y &&
         this.pos.y <= obstacles[i].corner2.y
       ) {
         this.obstaclecrashed = true;
@@ -63,8 +63,9 @@ function Rocket(dna) {
       this.history.splice(0, 1);
     }
     this.applyForce(this.dna.genes[count]);
+    this.collision();
 
-    if (!this.completed || !this.crashed || !this.obstaclecrashed) {
+    if (!this.completed && !this.crashed && !this.obstaclecrashed) {
       this.vel.add(this.acc);
       this.pos.add(this.vel);
       this.acc.mult(0);

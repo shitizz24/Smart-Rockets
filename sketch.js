@@ -30,7 +30,7 @@ function Target() {
 }
 
 function setup() {
-  frameRate(90);
+  setFrameRate(120);
   createCanvas(windowWidth * 0.9, windowHeight * 0.7);
   population = new Population();
   lifeP = createP();

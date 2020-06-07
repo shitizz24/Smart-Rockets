@@ -25,7 +25,7 @@ function DNA(genes) {
 
   this.mutation = function () {
     for (var i = 0; i < this.genes.length; i++) {
-      if (random(i) < mutationRate) {
+      if (random(i) > mutationRate) {
         this.genes[i] = p5.Vector.random2D();
         this.genes[i].setMag(maxforce);
       }
