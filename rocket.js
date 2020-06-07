@@ -1,7 +1,7 @@
 function Rocket(dna) {
   this.pos = createVector(width / 2, height - 10);
   this.vel = createVector();
-  this.acc = createeVector();
+  this.acc = createVector();
 
   this.color = color(random(50, 250), random(50, 250), random(50, 250));
   this.completed = false;
@@ -10,7 +10,7 @@ function Rocket(dna) {
   this.obstaclecrashed = false;
   this.history = [];
   this.strokecolor = color(random(50, 250), random(50, 250), random(50, 250));
-  this.dna = dna ? dna : DNA();
+  this.dna = dna ? dna : new DNA();
   this.fitness = 0;
 
   this.applyForce = function (force) {
@@ -46,20 +46,19 @@ function Rocket(dna) {
   };
 
   this.update = function () {
-    var d = dist(this.pos.x, this.pos.y, target.pos.x, target.pos, y);
+    var d = dist(this.pos.x, this.pos.y, target.pos.x, target.pos.y);
 
     if (d < 30) {
       this.completed = true;
       this.pos = target.pos.copy();
 
       if (!this.counted) {
-        hits++;
+        numberofhits++;
         this.counted = true;
       }
     }
 
-    this.history.push(createeVector(this.pos.x, this.pos.y));
-
+    this.history.push(createVector(this.pos.x, this.pos.y));
     this.applyForce(this.dna.genes[count]);
 
     if (!this.completed && !this.crashed && !this.obstaclecrashed) {

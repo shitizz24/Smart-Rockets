@@ -19,7 +19,7 @@ function Population() {
     var maxfit = 0;
 
     for (var i = 0; i < this.popsize; i++) {
-      this.rockets.calcFitness();
+      this.rockets[i].calcFitness();
       if (this.rockets[i].fitness > maxfit) {
         maxfit = this.rockets[i].fitness;
       }
@@ -38,7 +38,7 @@ function Population() {
     }
   };
 
-  this.naturalselection = function () {
+  this.selection = function () {
     var newRockets = [];
 
     for (var i = 0; i < this.rockets.length; i++) {
