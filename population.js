@@ -1,7 +1,7 @@
 function Population() {
   this.rockets = [];
 
-  this.popsize = 50;
+  this.popsize = 30;
 
   this.matingpool = [];
 
@@ -17,14 +17,12 @@ function Population() {
 
   this.evaluate = function () {
     var maxfit = 0;
-
     for (var i = 0; i < this.popsize; i++) {
       this.rockets[i].calcFitness();
       if (this.rockets[i].fitness > maxfit) {
         maxfit = this.rockets[i].fitness;
       }
     }
-
     for (var i = 0; i < this.popsize; i++) {
       this.rockets[i].fitness /= maxfit;
     }

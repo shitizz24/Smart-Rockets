@@ -17,17 +17,17 @@ function Rocket(dna) {
     this.acc.add(force);
   };
   this.calcFitness = function () {
-    var d = dist(this.pos.x, this.pos.y, target.pos.x, target.pos.y);
+    var d = dist(this.pos.x, this.pos.y, target1.pos.x, target1.pos.y);
     this.fitness = map(d, 0, width, width, 0);
 
     if (this.completed) {
-      this.fitness *= 10 * (1000 / count);
+      this.fitness *= 100 * (1000 / count);
     }
     if (this.crashed) {
-      this.fitness /= 20;
+      this.fitness /= 100;
     }
     if (this.obstaclecrashed) {
-      this.fitness /= 40;
+      this.fitness /= 120;
     }
   };
 
@@ -46,11 +46,11 @@ function Rocket(dna) {
   };
 
   this.update = function () {
-    var d = dist(this.pos.x, this.pos.y, target.pos.x, target.pos.y);
+    var d = dist(this.pos.x, this.pos.y, target1.pos.x, target1.pos.y);
 
     if (d < 30) {
       this.completed = true;
-      this.pos = target.pos.copy();
+      this.pos = target1.pos.copy();
 
       if (!this.counted) {
         numberofhits++;
@@ -59,8 +59,16 @@ function Rocket(dna) {
     }
 
     this.history.push(createVector(this.pos.x, this.pos.y));
-    if (this.history.length > 30) {
+    if (this.history.length > 20) {
       this.history.splice(0, 1);
+    }
+    if (
+      this.pos.x <= 0 ||
+      this.pos.x >= width ||
+      this.pos.y <= 0 ||
+      this.pos.y >= height
+    ) {
+      this.crashed = true;
     }
     this.applyForce(this.dna.genes[count]);
     this.collision();

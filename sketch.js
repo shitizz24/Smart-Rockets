@@ -1,9 +1,9 @@
 var population;
-var lifespan = 300;
+var lifespan = 150;
 var lifeP;
 var count = 0;
 var target;
-var maxforce = 1;
+var maxforce = 2;
 var numberofhits = 0;
 var numberofhitsP;
 var locked = undefined;
@@ -15,7 +15,7 @@ function reset() {
   this.obstacles = [];
 }
 
-function Target() {
+function Target1() {
   this.pos = createVector(width / 2, 50);
   this.r = 30;
   this.color = [color(0, 0, 255), color(255, 255, 255), color(255, 0, 0)];
@@ -30,14 +30,13 @@ function Target() {
 }
 
 function setup() {
-  setFrameRate(120);
   createCanvas(windowWidth * 0.9, windowHeight * 0.7);
   population = new Population();
   lifeP = createP();
 
   numberofhitsP = createP();
 
-  target = new Target();
+  target1 = new Target1();
   numberofhitsP.style("color:white");
 
   lifeP.style("color:white");
@@ -85,5 +84,5 @@ function draw() {
     obstacles[i].show();
   }
   fill(color(255, 110, 0));
-  target.show();
+  target1.show();
 }
