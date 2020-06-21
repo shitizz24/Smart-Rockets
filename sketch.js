@@ -3,12 +3,12 @@ var lifespan = 150;
 var lifeP;
 var count = 0;
 var target;
-var maxforce = 2;
+var maxforce = 1.5;
 var numberofhits = 0;
 var numberofhitsP;
 var locked = undefined;
 var obstacles = [];
-var mutationRate = 0.01;
+var mutationRate = 0.025;
 var flag = false;
 function reset() {
   population.reset();
